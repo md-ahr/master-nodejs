@@ -1,0 +1,108 @@
+<div class="data-table p-8 w-full bg-white rounded-lg">
+  <div class="relative">
+    <input type="text" id="searchInput"
+      class="py-2 pl-9 pr-4 text-sm border border-gray-400 rounded focus:outline-none focus:border-green-500"
+      placeholder="Search..." />
+    <i class="fa fa-search text-sm text-gray-500 absolute left-4 top-1/2 -translate-y-1/2" aria-hidden="true"></i>
+  </div>
+
+  <div class="mt-5 overflow-x-auto">
+    <% if (locals.urls) { %>
+      <table class="w-full text-left border border-[#e3e3e3] rounded">
+        <thead class="py-5 border">
+          <th>SL No.</th>
+          <th>Original URL</th>
+          <th>Short URL</th>
+          <th>Total Clicks</th>
+        </thead>
+        <tbody>
+          <% urls.forEach((url, index)=> { %>
+            <tr class="border">
+              <td>
+                <%= index + 1 %>
+              </td>
+              <td>
+                <%= url.redirectUrl %>
+              </td>
+              <td class="flex items-start gap-x-3">
+                <p>http://localhost:3000/<%= url.shortId %>
+                </p>
+                <button type="button" title="copy" class="text-xs hover:text-emerald-600 transition duration-300">
+                  <i class="fa fa-clone" aria-hidden="true"></i>
+                </button>
+              </td>
+              <td>
+                <%= url.visitHistory.length %>
+              </td>
+            </tr>
+            <% }) %>
+        </tbody>
+      </table>
+      <% } %>
+  </div>
+
+  <div class="mt-5 flex items-center justify-between gap-x-5">
+    <p class="text-sm text-gray-500 font-medium">
+      Showing <%= urls.length ? skip + 1 : 0 %> to <%= skip + urls.length %> out of <%= total %>
+    </p>
+    <ul class="w-max flex items-center justify-center gap-x-6 text-sm">
+      <li>
+        <% if (currentPage> 1) { %>
+          <a href="/?page=<%= currentPage - 1 %>"
+            class="block font-medium text-center hover:text-green-500 transition duration-300">
+            <i class="fa fa-angle-left text-lg font-semibold" aria-hidden="true"></i>
+          </a>
+          <% } else { %>
+            <span class="block font-medium text-gray-300 cursor-not-allowed">
+              <i class="fa fa-angle-left text-lg font-semibold" aria-hidden="true"></i>
+            </span>
+            <% } %>
+      </li>
+
+      <% if (currentPage> 1 && currentPage > 2) { %>
+        <li><a href="/?page=1" class="block font-medium">1</a></li>
+        <% } %>
+
+          <% if (currentPage> 5) { %>
+            <li><span class="block font-medium hover:text-green-500 transition duration-300">...</span></li>
+            <% } %>
+
+              <% for(let i=Math.max(1, currentPage - 1); i <=Math.min(currentPage + 1, totalPages); i++) { %>
+                <% if (i===currentPage) { %>
+                  <li><span class="block font-medium text-green-500">
+                      <%= i %>
+                    </span></li>
+                  <% } else { %>
+                    <li><a href="/?page=<%= i %>"
+                        class="block font-medium hover:text-green-500 transition duration-300">
+                        <%= i %>
+                      </a></li>
+                    <% } %>
+                      <% } %>
+
+                        <% if (currentPage < totalPages - 1) { %>
+                          <li><span class="block font-medium hover:text-green-500 transition duration-300">...</span>
+                          </li>
+                          <% } %>
+
+                            <% if (currentPage < totalPages) { %>
+                              <li><a href="/?page=<%= totalPages %>" class="block font-medium">
+                                  <%= totalPages %>
+                                </a></li>
+                              <% } %>
+
+                                <li>
+                                  <% if (currentPage < totalPages) { %>
+                                    <a href="/?page=<%= currentPage + 1 %>"
+                                      class="block font-medium hover:text-green-500 transition duration-300">
+                                      <i class="fa fa-angle-right text-lg font-semibold" aria-hidden="true"></i>
+                                    </a>
+                                    <% } else { %>
+                                      <span class="block font-medium text-gray-300 cursor-not-allowed">
+                                        <i class="fa fa-angle-right text-lg font-semibold" aria-hidden="true"></i>
+                                      </span>
+                                      <% } %>
+                                </li>
+    </ul>
+  </div>
+</div>

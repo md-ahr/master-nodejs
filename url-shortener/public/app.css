@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .flash-toast {
+    animation: toastAnimate linear 0.7s;
+  }
+  .data-table {
+    th,
+    td {
+      @apply py-3 pl-8 text-sm;
+    }
+  }
+}
+
+.close-toast {
+  right: -100%;
+  animation: closeToastAnimate linear 0.7s;
+}
+
+@keyframes toastAnimate {
+  0% {
+    @apply -right-full opacity-0;
+  }
+  50% {
+    @apply right-[10%] opacity-50;
+  }
+  100% {
+    @apply right-4 opacity-100;
+  }
+}
+
+@keyframes closeToastAnimate {
+  0% {
+    @apply right-4 opacity-100;
+  }
+  50% {
+    @apply right-[10%] opacity-50;
+  }
+  100% {
+    @apply -right-full opacity-0;
+  }
+}

@@ -1,0 +1,12 @@
+<form action="/url" method="post"
+  class="my-7 p-7 w-full sm:w-[600px] bg-white relative border border-[#e3e3e3] rounded-lg flex items-center gap-x-4">
+  <div class="w-full">
+    <input type="text" name="url" id="url"
+      class="px-4 h-12 w-full border border-[#5e5e5e] rounded focus-within:outline-none focus:border-green-500"
+      placeholder="https://example.com" autofocus required />
+  </div>
+  <span id="error-message" class="hidden text-[13px] text-red-500 font-medium absolute bottom-2">Please input valid
+    url</span>
+  <button type="submit" id="submit"
+    class="px-8 py-3 text-base text-white bg-green-500 font-semibold rounded-lg hover:bg-green-600 transition duration-300">Generate</button>
+</form>

@@ -13,7 +13,8 @@ const generateShortUrl = async (req, res) => {
       redirectUrl: url,
       visitHistory: [],
     });
-    return res.render("home", { id: shortId });
+    req.flash("success", "Short url generated successfully");
+    return res.redirect(301, "/");
     // return res.status(200).json({
     //   success: true,
     //   message: "Short url generated successfully",
@@ -21,9 +22,11 @@ const generateShortUrl = async (req, res) => {
     // });
   } catch (error) {
     console.log(error);
-    return res
-      .status(500)
-      .json({ success: false, message: "Internal server error" });
+    req.flash("error", "Failed to generated short url");
+    return res.redirect(301, "/");
+    // return res
+    //   .status(500)
+    //   .json({ success: false, message: "Internal server error" });
   }
 };
 

@@ -1,0 +1,11 @@
+<% if ( expressFlash.length> 0 ) { %>
+  <div id="toast-message"
+    class="flash-toast absolute top-5 right-5 px-6 py-3 text-base bg-green-500 text-white font-medium rounded">
+    <p>
+      <%= expressFlash %>
+    </p>
+    <button type="button" id="toast-close" class="text-lg text-gray-600 absolute top-0 right-1">
+      <i class="fa fa-times" aria-hidden="true" style="-webkit-text-stroke: 2px #22C55E;"></i>
+    </button>
+  </div>
+<% } %>
